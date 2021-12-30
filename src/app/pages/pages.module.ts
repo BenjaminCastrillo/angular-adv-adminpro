@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 
 import { ComponentesModule } from '../components/components.module';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 
 
@@ -20,7 +21,8 @@ import { ComponentesModule } from '../components/components.module';
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    AccountSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -31,10 +33,11 @@ import { ComponentesModule } from '../components/components.module';
     ComponentesModule
   ],
   exports:[
-  //  DashboardComponent,
-   // ProgressComponent,
-  //  Grafica1Component,
-   // PagesComponent
+   DashboardComponent,
+   ProgressComponent,
+    Grafica1Component,
+    AccountSettingsComponent,
+   PagesComponent
   ],
 })
 export class PagesModule { }

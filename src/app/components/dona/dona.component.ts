@@ -15,7 +15,7 @@ export class DonaComponent implements OnInit {
 @Input('values') datos:number[] =[1,1,1];
 
 
-// public datos1:number[]=[ 50, 5, 1 ];
+ public datos1:number[]=[ 50, 5, 1 ];
 
    // Doughnut
  //  public doughnutChartLabels: string[] = [ 'Download Sales', 'In-Store Sales', 'Mail-Order Sales' ];
@@ -23,7 +23,7 @@ export class DonaComponent implements OnInit {
  public doughnutChartData: ChartData<'doughnut'> = {
      labels: this.doughnutChartLabels,
      datasets: [
-       { data: this.datos,
+       { data: this.datos1,
          backgroundColor:['#9E120E','#FF5800','#FFB414'],
          hoverBackgroundColor: ['#00821C','#09DB36','#024D0F'],
          hoverBorderColor:['#000000','#000000','#00000003']},
