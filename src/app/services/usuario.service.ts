@@ -7,6 +7,7 @@ import {RegisterForm} from '../interfaces/register-form';
 import {LoginForm} from '../interfaces/login-form';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 const base_url=environment.base_url;
 
@@ -19,6 +20,7 @@ declare const gapi:any;
 export class UsuarioService {
  
   public auth2:any;
+  public usuario:Usuario | undefined;
   
   constructor( private http:HttpClient,
     private router:Router,
@@ -27,7 +29,12 @@ export class UsuarioService {
       this.googleInit();
     }
 
-
+    get token():string{
+      return localStorage.getItem('tokenHopitales')||'';
+    }
+    get uid():string{
+      return this.usuario?.uid || '';
+    }
 
   googleInit(){
 
@@ -46,23 +53,7 @@ export class UsuarioService {
     })
   }
 
-  validarToken():Observable<boolean>{
 
-    const token= localStorage.getItem('tokenHopitales')||'';
-    return this.http.get(`${base_url}/login/renew`,{
-      headers:{
-        'x-token':token
-      }
-    }).pipe(
-        tap(
-        {next:(resp:any)=>{
-          localStorage.setItem('tokenHopitales',resp.token)
-        }
-      }),map(resp=>true),
-      catchError(error=> of(false))
-    );
-  
-  }
 
   crearUsuario(formData:RegisterForm){
 
@@ -78,15 +69,18 @@ export class UsuarioService {
 
   login(formData:LoginForm){
 
+    console.log('en el login',formData);
     return this.http.post(`${base_url}/login`,formData).
         pipe(
           tap(
             {next:(resp:any)=>{
+              console.log('usuario de la clase 1',this.usuario);
               localStorage.setItem('tokenHopitales',resp.token)
             }
           })
         );
   }
+
   loginGoogle(token:any){
 
     return this.http.post(`${base_url}/login/google`,{token}).
@@ -98,12 +92,58 @@ export class UsuarioService {
           })
         );
   }
+
+  actualizarPerfil(data:{nombre:string,email:string,role?:string|undefined}){
+
+    data={
+      ...data,
+      role :this.usuario?.role
+    };
+
+   // this.usuario!.nombre=data.nombre;
+
+   return this.http.put(`${base_url}/usuarios/${this.uid}`,data,{
+      headers:{
+        'x-token':this.token
+      }
+    })
+  } 
+
+  validarToken():Observable<boolean>{
+
+
+    console.log('en la funcion validarToken')
+
+    return this.http.get(`${base_url}/login/renew`,{
+      headers:{
+        'x-token':this.token
+      }
+    }).pipe(
+        map((resp:any)=>{
+          const {email,google,nombre, role,img,uid}=resp.usuario;
+          this.usuario = new Usuario(nombre,email,'',img,google,role,uid);
+          localStorage.setItem('tokenHopitales',resp.token);
+          return true;
+        }),
+      catchError(error=> of(false))
+    );
+  }
+
+  // tap(
+  //   {next:(resp:any)=>{
+  //     const {email,google,nombre, role,img,uid}=resp.usuario;
+  //     this.usuario = new Usuario(nombre,email,'',img,google,role,uid);
+  //     localStorage.setItem('tokenHopitales',resp.token);
+  //     return true;
+  //   }
+  // }),map(resp=>true),
+
+
   logout(){
     localStorage.removeItem('tokenHopitales');
     this.auth2.signOut().then( ()=> {
       this.ngZone.run(()=>{
         this.router.navigateByUrl('/login');
-        console.log('User signed out.');
       })
     });
   }

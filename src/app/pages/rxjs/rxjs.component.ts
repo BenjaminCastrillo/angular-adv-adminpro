@@ -23,22 +23,25 @@ export class RxjsComponent implements OnInit,OnDestroy {
     //   complete: ()=> console.log('se completo')
     // });
 
+    console.log('inicio');
     this.intervalSubs=this.retornaIntervalo().subscribe({
       next: (a)=>console.log(a)
-    })
+    });
+    console.log('fin');
   }
 
   ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
+
       this.intervalSubs.unsubscribe();
   }
 
   retornaIntervalo():Observable<number>{
 
 return interval(500).pipe(
- // take(10),
+ // take(10), Solo envia 10 respoestas
   map(a=>{return a+1}),
   filter(valor=> valor%2===0?true:false)
 );
@@ -51,6 +54,10 @@ return interval(500).pipe(
 
     let i=-1;
     const obs$= new Observable<number>( observer=>{
+
+ 
+    
+
       const intervalo= setInterval(()=>{
         i++;
         observer.next(i);
@@ -65,7 +72,7 @@ return interval(500).pipe(
           observer.error('i llego a 2')        }
 
       },1000)
-    });
+     });
     return obs$;  
   }
 

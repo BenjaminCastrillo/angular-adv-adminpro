@@ -1,8 +1,13 @@
+import { environment } from '../../environments/environment.prod';
+
+const base_Url=environment.base_url;
+
 export class Usuario{
 
+
   constructor(
-    public email: string,
     public nombre: string,
+    public email: string,
     public password?: string,
     public img?: string,
     public google?: boolean,
@@ -10,4 +15,21 @@ export class Usuario{
     public uid?: string,
     )
     {}
+
+    get imagenUrl(){
+
+      // para los casos del usuario de google.
+      if (this.img?.includes('https')){ 
+          return this.img;
+      }
+
+      if (this.img){
+        return `${base_Url}/upload/usuarios/${this.img}`;
+      }else{
+        return `${base_Url}/upload/usuarios/no-image`;
+      }
+
+
+    }
+
 }

@@ -6,6 +6,7 @@ import { Grafica1Component } from './grafica1/grafica1.component';
 import { ProgressComponent } from './progress/progress.component';
 import { PromesaComponent } from './promesa/promesa.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PerfilComponent } from './perfil/perfil.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PagesComponent } from './pages.component';
 import { AuthGuard } from '../guards/auth.guard';
@@ -22,6 +23,7 @@ const routes: Routes = [
     {path:'account-settings',component:AccountSettingsComponent,data:{titulo:'Tema'}},
     {path:'promesa',component:PromesaComponent,data:{titulo:'Promesa'}},
     {path:'rxjs',component:RxjsComponent,data:{titulo:'rxjs'}},
+    {path:'perfil',component:PerfilComponent,data:{titulo:'Perfil de usuario'}},
     
   ]},
 

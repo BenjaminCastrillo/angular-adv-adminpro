@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   this.usuarioService.login(this.loginForm.value).
       subscribe({next:(resp)=>{
-        console.log('usuario valido',resp);
+
         if (this.loginForm.get('remember')?.value){
             localStorage.setItem('emailHospitales',this.loginForm.get('email')?.value)
             localStorage.setItem('rememberHospitales',this.loginForm.get('remember')?.value)
@@ -55,6 +55,9 @@ export class LoginComponent implements OnInit {
       },error: (error)=>
         swal.fire('Error',error.error.msg,'error')
       })
+
+   
+
 
     // this.router.navigateByUrl('/');
   }
@@ -90,11 +93,9 @@ export class LoginComponent implements OnInit {
   }
   
   attachSignin(element:any) {
-    console.log(element.id);
     this.auth2.attachClickHandler(element, {},
         (googleUser:any)=> {
           const id_token = googleUser.getAuthResponse().id_token;
-          console.log(id_token);
           this.usuarioService.loginGoogle(id_token)
           .subscribe(resp=>{
 
