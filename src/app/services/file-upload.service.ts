@@ -17,9 +17,7 @@ export class FileUploadService {
     tipo:'usuarios'|'medicos'|'hospitales',
     id:string|undefined
   ){
-
     try{
-
       const url=`${base_url}/upload/${tipo}/${id}`;
       const formData= new FormData();
       formData.append('imagen',archivo);
@@ -40,8 +38,6 @@ export class FileUploadService {
           console.log(data.msg);
           return false
         }
-   
-
     }catch(err){
       console.log(err);
       return false

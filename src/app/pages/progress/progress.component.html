@@ -42,3 +42,57 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+
+
+  <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Seleccion b</th> 
+                <th>valor b</th> 
+                <th>Seleccion c</th>
+                <th>valor c</th> 
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let elem of prueba;let i =index">
+                <td>{{elem.a}}</td>
+                <td>
+                   
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" 
+                            [checked]="elem.b"
+                            [(ngModel)]="elem.b" 
+                            (ngModelChange)="selectMark($event,i)">
+                            <span class="lever switch-col-amber"></span>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <i *ngIf="elem.b" class="fa fa-check"></i>          
+                <td>
+                    <div class="demo-checkbox">
+                        <input type="checkbox" id="basic_checkbox_1" 
+                        [(ngModel)]="elem.c" 
+                        (ngModelChange)="selectMark($event,i)"/>
+                        <label for="basic_checkbox_1">Default</label>          
+                    </div>
+                </td>
+                <td>
+                    <i *ngIf="elem.c" class="fa fa-check"></i>       
+                   
+                <td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+</div>
