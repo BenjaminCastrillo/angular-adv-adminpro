@@ -40,7 +40,6 @@ export class PerfilComponent implements OnInit {
       const {nombre,email}=this.perfilForm.value;
       this.usuario!.nombre=nombre;
       this.usuario!.email=email;
-      console.log(resp);
 
       swal.fire('Datos guardados','Perfil modificado éxito','success');
 
@@ -51,7 +50,6 @@ export class PerfilComponent implements OnInit {
   }
 
   cambiarImage(event:any){
-     console.log(event.target.files[0]);
      this.imagenSubida=event.target.files[0];
     
      if(!this.imagenSubida){

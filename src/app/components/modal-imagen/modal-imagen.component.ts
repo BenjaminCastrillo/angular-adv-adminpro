@@ -15,7 +15,7 @@ export class ModalImagenComponent implements OnInit {
   public imagenTemp:string|ArrayBuffer|null=null;
 
   constructor(public modalImagenService:ModalImagenService,
-    private fileUploadService:FileUploadService) { }
+              private fileUploadService:FileUploadService) { }
 
   ngOnInit(): void {
   }
@@ -27,7 +27,6 @@ export class ModalImagenComponent implements OnInit {
   }
 
   cambiarImage(event:any){
-    console.log(event.target.files[0]);
     this.imagenSubida=event.target.files[0];
    
     if(!this.imagenSubida){

@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-  console.log('loginForm',this.loginForm.value);
 
   if (this.loginForm.invalid){
     return
@@ -62,15 +61,7 @@ export class LoginComponent implements OnInit {
     // this.router.navigateByUrl('/');
   }
 
-  //  onSuccess(googleUser:any) {
-  //   console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-  //   var id_token = googleUser.getAuthResponse().id_token;
-  //   console.log(id_token);
-  // }
 
-  // onFailure(error:any) {
-  //   console.log(error);
-  // }
 
   renderButton() {
     gapi.signin2.render('my-signin2', {

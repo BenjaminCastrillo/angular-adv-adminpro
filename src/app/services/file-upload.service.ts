@@ -31,15 +31,12 @@ export class FileUploadService {
 
         const data= await resp.json();
 
-        console.log('respuesta',data);
         if (data.ok){
           return data.nombre
         }else{
-          console.log(data.msg);
           return false
         }
     }catch(err){
-      console.log(err);
       return false
     }
 

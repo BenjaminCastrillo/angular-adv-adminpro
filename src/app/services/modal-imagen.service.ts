@@ -10,14 +10,12 @@ const base_url=environment.base_url;
 })
 export class ModalImagenService {
 
-
-
   private _ocultarModal:boolean=true;
   public tipo:'usuarios'|'medicos'|'hospitales'='usuarios';
   public id:string|undefined='';
   public img:string='';
 
-  public nuevaImagen:EventEmitter<string> =new EventEmitter<string>()
+  public nuevaImagen:EventEmitter<string> =new EventEmitter<string>();
 
   get ocultarModal(){
     return this._ocultarModal;

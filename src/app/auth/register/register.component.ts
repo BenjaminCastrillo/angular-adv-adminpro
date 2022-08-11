@@ -34,14 +34,12 @@ export class RegisterComponent implements OnInit {
 
   crearUsuario(){
     this.formSubmitted=true;
-    console.log(this.registerForm.value);
     if (this.registerForm.invalid){
       return
     }
   
     this.usuarioService.crearUsuario(this.registerForm.value).
         subscribe({next:(resp)=>{
-          console.log('usuario creado',resp);
          //navegar al dashboard
         this.router.navigateByUrl('/');
         },error: (error)=>

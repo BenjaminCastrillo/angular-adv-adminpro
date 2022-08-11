@@ -11,6 +11,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PagesComponent } from './pages.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 
 const routes: Routes = [
 
@@ -27,6 +30,9 @@ const routes: Routes = [
     {path:'perfil',component:PerfilComponent,data:{titulo:'Perfil de usuario'}},
     //Mantenimientos
     {path:'usuarios',component:UsuariosComponent,data:{titulo:'Usuarios'}},
+    {path:'hospitales',component:HospitalesComponent,data:{titulo:'Hospitales'}},
+    {path:'medicos',component:MedicosComponent,data:{titulo:'Medicos'}},
+    {path:'medicos/medico/:id',component:MedicoComponent,data:{titulo:'Medico'}},
 
   ]},
 

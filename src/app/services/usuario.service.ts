@@ -78,12 +78,10 @@ export class UsuarioService {
 
   login(formData:LoginForm){
 
-    console.log('en el login',formData);
     return this.http.post(`${base_url}/login`,formData).
         pipe(
           tap(
             {next:(resp:any)=>{
-              console.log('usuario de la clase 1',this.usuario);
               localStorage.setItem('tokenHopitales',resp.token)
             }
           })
@@ -116,8 +114,6 @@ export class UsuarioService {
 
   validarToken():Observable<boolean>{
 
-
-    console.log('en la funcion validarToken')
 
     return this.http.get(`${base_url}/login/renew`,{
       headers:{
