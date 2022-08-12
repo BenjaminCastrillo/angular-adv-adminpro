@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.model';
 import { CargarUsuario } from '../interfaces/cargar-usuario';
+import { ReturnStatement } from '@angular/compiler';
 
 const base_url=environment.base_url;
 
@@ -31,12 +32,16 @@ export class UsuarioService {
     }
 
     get token():string{
-      return localStorage.getItem('tokenHopitales')||'';
+      return localStorage.getItem('tokenHospitales')||'';
     }
     get uid():string{
       return this.usuario?.uid || '';
     }
 
+    get role():string|undefined{
+
+      return this.usuario?.role;
+    }
     get headers(){
       return {
         headers:{
@@ -70,19 +75,21 @@ export class UsuarioService {
         pipe(
           tap(
             {next:(resp:any)=>{
-              localStorage.setItem('tokenHopitales',resp.token)
+              this.guardarLocalStorage(resp.token,resp.menu);
+
             }
           })
         );
   }
 
   login(formData:LoginForm){
+    console.log('llamo al servicio de login del servidor');
 
     return this.http.post(`${base_url}/login`,formData).
         pipe(
           tap(
             {next:(resp:any)=>{
-              localStorage.setItem('tokenHopitales',resp.token)
+              this.guardarLocalStorage(resp.token,resp.menu);
             }
           })
         );
@@ -94,7 +101,8 @@ export class UsuarioService {
         pipe(
           tap(
             {next:(resp:any)=>{
-              localStorage.setItem('tokenHopitales',resp.token)
+              this.guardarLocalStorage(resp.token,resp.menu);
+
             }
           })
         );
@@ -123,7 +131,8 @@ export class UsuarioService {
         map((resp:any)=>{
           const {email,google,nombre, role,img,uid}=resp.usuario;
           this.usuario = new Usuario(nombre,email,'',img,google,role,uid);
-          localStorage.setItem('tokenHopitales',resp.token);
+          this.guardarLocalStorage(resp.token,resp.menu);
+
           return true;
         }),
       catchError(error=> of(false))
@@ -134,14 +143,15 @@ export class UsuarioService {
   //   {next:(resp:any)=>{
   //     const {email,google,nombre, role,img,uid}=resp.usuario;
   //     this.usuario = new Usuario(nombre,email,'',img,google,role,uid);
-  //     localStorage.setItem('tokenHopitales',resp.token);
+  //     localStorage.setItem('tokenHospitales',resp.token);
   //     return true;
   //   }
   // }),map(resp=>true),
 
 
   logout(){
-    localStorage.removeItem('tokenHopitales');
+    localStorage.removeItem('tokenHospitales');
+    localStorage.removeItem('menuHospitales');
     this.auth2.signOut().then( ()=> {
       this.ngZone.run(()=>{
         this.router.navigateByUrl('/login');
@@ -174,4 +184,10 @@ return this.http.get<CargarUsuario>(`${base_url}/usuarios?desde=${desde}`,this.h
 
    return this.http.put(`${base_url}/usuarios/${usuario.uid}`,usuario,this.headers)
   } 
+
+  guardarLocalStorage(token:string,menu:any){
+    localStorage.setItem('tokenHospitales',token);
+    localStorage.setItem('menuHospitales',JSON.stringify(menu));
+    return;
+  }
 }

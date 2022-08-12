@@ -17,7 +17,7 @@ export class HospitalService {
   ) { }
 
   get token():string{
-    return localStorage.getItem('tokenHopitales')||'';
+    return localStorage.getItem('tokenHospitales')||'';
   }
 
   get headers(){

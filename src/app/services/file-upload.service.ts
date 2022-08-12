@@ -25,7 +25,7 @@ export class FileUploadService {
       const resp= await fetch(url,{
         method:'PUT',
         headers: {
-          'x-token':localStorage.getItem('tokenHopitales')||''
+          'x-token':localStorage.getItem('tokenHospitales')||''
         },
         body:formData});
 

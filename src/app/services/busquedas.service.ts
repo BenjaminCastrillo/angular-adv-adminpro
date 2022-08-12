@@ -18,7 +18,7 @@ export class BusquedasService {
 
 
   get token():string{
-    return localStorage.getItem('tokenHopitales')||'';
+    return localStorage.getItem('tokenHospitales')||'';
   }
 
   get headers(){
@@ -42,6 +42,12 @@ export class BusquedasService {
   private transformarMedicos(resultados:any[]):Medico[]{
 
     return resultados;
+  }
+
+  busquedaGlobal(termino:string){
+
+    return this.http.get<any[]>(`${this.base_url}/todo/${termino}`,this.headers)
+  
   }
 
   buscar(tipo:"hospitales"|"medicos"|"usuarios",termino:string){

@@ -16,7 +16,7 @@ export class MedicoService {
   constructor(private http:HttpClient,) { }
 
   get token():string{
-    return localStorage.getItem('tokenHopitales')||'';
+    return localStorage.getItem('tokenHospitales')||'';
   }
 
   get headers(){

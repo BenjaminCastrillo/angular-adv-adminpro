@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
       subscribe({next:(resp)=>{
 
         if (this.loginForm.get('remember')?.value){
+
             localStorage.setItem('emailHospitales',this.loginForm.get('email')?.value)
             localStorage.setItem('rememberHospitales',this.loginForm.get('remember')?.value)
         }else{
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit {
 
    
 
-
+  
     // this.router.navigateByUrl('/');
   }
 
