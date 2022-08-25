@@ -83,12 +83,12 @@ export class UsuarioService {
   }
 
   login(formData:LoginForm){
-    console.log('llamo al servicio de login del servidor');
 
     return this.http.post(`${base_url}/login`,formData).
         pipe(
           tap(
             {next:(resp:any)=>{
+              console.log('USUARIO SERVICE (login) guardo el menu en local storage');
               this.guardarLocalStorage(resp.token,resp.menu);
             }
           })

@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit {
   
     this.usuario=this.usuarioService.usuario;
     this.menuItems=this.sidebarService.menu;
+    console.log('SIDEBAR COMPONENT cojo el menu de la variable publica this.menu de sidebar services',this.menuItems);
 
   }
 

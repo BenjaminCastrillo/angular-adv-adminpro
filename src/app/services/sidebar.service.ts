@@ -8,7 +8,9 @@ export class SidebarService {
   public menu=[];
   cargarMenu(){
 
+    console.log('SIDEBAR SERVICES cargo el menu del local storage')
     this.menu= JSON.parse(localStorage.getItem('menuHospitales')!) || [];
+    console.log('y lo meto en una variable publica this.menu',this.menu);
   }
 
   // menu:any[]=[{
